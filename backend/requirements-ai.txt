@@ -1,0 +1,15 @@
+# Dépendances IA (lourdes). Installées par ./setup_mac.sh (sauf si --no-ai).
+# Sur Mac Apple Silicon, les wheels officiels de PyTorch incluent l'accélération MPS (Metal).
+torch>=2.5.1
+torchvision>=0.20
+huggingface_hub>=0.24
+
+# Génération de l'élément (diffusion "inpainting", SDXL par défaut)
+diffusers>=0.31
+transformers>=4.44
+accelerate>=0.33
+safetensors>=0.4
+
+# SAM2 (Segment Anything 2) s'installe depuis GitHub, APRÈS torch, sans isolation de build :
+#   SAM2_BUILD_CUDA=0 pip install --no-build-isolation "git+https://github.com/facebookresearch/sam2.git"
+# (fait automatiquement par setup_mac.sh)

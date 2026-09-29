@@ -1,0 +1,11 @@
+# Socle (obligatoire) : API + traitement vidéo "classique".
+# Suffit pour faire tourner l'app en mode sans IA lourde (GrabCut, flux optique,
+# reconstruction temporelle, recoloration, incrustation d'une image importée).
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+pydantic>=2.6
+numpy>=1.26
+opencv-contrib-python-headless>=4.9
+pillow>=10.0
+imageio-ffmpeg>=0.5  # embarque un binaire ffmpeg (H.264) si Homebrew n'en fournit pas

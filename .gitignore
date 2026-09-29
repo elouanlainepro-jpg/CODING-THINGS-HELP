@@ -1,0 +1,20 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node / build
+node_modules/
+frontend/dist/
+
+# Données locales (lourdes / personnelles)
+backend/workspace/
+backend/models/
+third_party/
+.env
+.DS_Store
+
+# Les clips générés restent sur ta machine (seul le dossier est versionné)
+elements/YOUR DAIL CLIPS/*
+!elements/YOUR DAIL CLIPS/.gitkeep

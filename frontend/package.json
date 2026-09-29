@@ -1,0 +1,20 @@
+{
+  "name": "licornia-swap-3000",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Interface cartoon/meme pour le remplacement d'objets vidéo par IA",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.2.0",
+    "vite": "^7.3.0"
+  }
+}
