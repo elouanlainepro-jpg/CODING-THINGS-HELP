@@ -10,7 +10,7 @@ Studio d'organisation de la semaine, du lundi au dimanche : cours, révisions, b
   cd "ORGANISATION/ELOUAN LAINE"
   python3 -m http.server 8000
   ```
-- **Sur iPhone** : publie le dossier (GitHub Pages, Netlify…) ou utilise le lien du studio hébergé sur claude.ai. Dans Safari : Partager → « Sur l'écran d'accueil » pour l'avoir comme une app.
+- **Sur iPhone** : voir [PLAN-TELEPHONE.md](PLAN-TELEPHONE.md) (lien claude.ai tout de suite, ou app installée via GitHub Pages).
 
 Aucune installation, aucune dépendance : HTML, CSS et JavaScript simples. Les polices viennent de Google Fonts, avec des polices de secours si tu es hors ligne.
 
