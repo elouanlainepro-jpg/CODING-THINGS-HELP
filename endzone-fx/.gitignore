@@ -1,6 +1,7 @@
 node_modules/
 build/
 renders/
+davinci/
 __pycache__/
 
 # Médias des edits : restent sur ton PC (trop lourds pour GitHub)

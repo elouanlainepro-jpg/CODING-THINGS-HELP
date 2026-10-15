@@ -145,6 +145,19 @@ npm run preview -- <nom>    # ouvre HyperFrames Studio dans le navigateur
 Dans Studio, tu peux cliquer sur un texte ou décaler un plan. La composition générée est
 dans `build/<nom>/index.html`, et le plan de montage détaillé dans `build/<nom>/plan.json`.
 
+## 7 bis. Finir le montage dans DaVinci Resolve
+
+```bash
+npm run davinci -- <nom>
+```
+
+Le générateur prépare un **kit DaVinci** dans `davinci/<nom>/` : la timeline déjà coupée sur les
+beats (ralentis et arrêts sur image inclus), la musique au bon passage, les marqueurs (beats,
+coupes, impacts, drop) et un calque transparent avec titres, logo, outro et flashs.
+Tu l'importes dans DaVinci et tu n'as plus qu'à ajouter tes effets.
+
+Procédure complète, de la préparation du projet modèle à l'export : **[DAVINCI.md](DAVINCI.md)**.
+
 ## 8. Formats
 
 - **Vertical 1080×1920, 60 i/s** : format actif (TikTok, Shorts, Reels).
@@ -170,9 +183,10 @@ brand/        logo, badge détouré, couleurs et polices (brand.json)
 formats/      vertical.json (actif), landscape.json (16:9 prévu)
 styles/       hits.json, highlights.json, story.json
 lib/          request.mjs (demande → réglages), plan.mjs (montage), compose.mjs (HTML HyperFrames)
-scripts/      new-edit, make-edit, preview, fetch-sfx, analyse musique/clips, assets de test
+scripts/      new-edit, make-edit, preview, davinci, fetch-sfx, analyse musique/clips, assets de test
 edits/<nom>/  edit.json + clips/ + musique (les médias ne vont pas sur GitHub)
 build/        compositions HyperFrames générées
+davinci/      kits DaVinci Resolve (npm run davinci)
 renders/      vidéos finales
 ```
 

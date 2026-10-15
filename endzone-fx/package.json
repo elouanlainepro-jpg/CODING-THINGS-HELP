@@ -9,9 +9,10 @@
     "edit": "node scripts/make-edit.mjs",
     "build": "node scripts/make-edit.mjs --no-render",
     "preview": "node scripts/preview.mjs",
+    "davinci": "node scripts/davinci.mjs",
     "sfx": "node scripts/fetch-sfx.mjs",
     "test-assets": "node scripts/py.mjs scripts/make_test_assets.py",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs && node scripts/py.mjs -m unittest discover -s tests -p \"test_*.py\""
   },
   "devDependencies": {
     "@fontsource/anton": "^5.2.6",

@@ -2,3 +2,5 @@ librosa>=0.10
 numpy>=1.26
 soundfile>=0.12
 Pillow>=10
+opentimelineio>=0.17
+otio-fcp-adapter>=1.0

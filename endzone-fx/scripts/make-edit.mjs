@@ -126,7 +126,8 @@ console.log(`✂️  ${plan.shots.length} plans · ${plan.duration.toFixed(2)} s
 for (const w of plan.warnings) console.warn(`⚠️  ${w}`);
 
 // ---------- Dossier de rendu (projet HyperFrames autonome) ----------
-const build = path.join(ROOT, "build", formatId === "vertical" ? id : `${id}-${formatId}`);
+const graphicsOnly = flag("graphics-only");
+const build = path.join(ROOT, "build", (formatId === "vertical" ? id : `${id}-${formatId}`) + (graphicsOnly ? "-gfx" : ""));
 fs.rmSync(build, { recursive: true, force: true });
 for (const d of ["assets/clips", "assets/freeze", "assets/sfx", "assets/fonts", "assets/brand"]) fs.mkdirSync(path.join(build, d), { recursive: true });
 const copy = (src, dst) => {
@@ -183,9 +184,30 @@ for (const ev of plan.sfx) {
 }
 if (missing.size) console.warn(`🔇 Bruitages absents (${[...missing].join(", ")}) : lance « npm run sfx » pour les télécharger depuis Freesound.`);
 
-const html = compose({ plan, brand, format, assets, seed: hashString(id), debugTiming: flag("debug-timing") });
+const html = compose({ plan, brand, format, assets, seed: hashString(id), debugTiming: flag("debug-timing"), graphicsOnly });
 fs.writeFileSync(path.join(build, "index.html"), html);
 fs.writeFileSync(path.join(build, "plan.json"), JSON.stringify(plan, null, 1));
+// Fiche pour l'export DaVinci (npm run davinci) : chemins absolus de tout ce qu'il faut.
+const abs = (p) => path.resolve(build, p);
+fs.writeFileSync(
+  path.join(build, "kit.json"),
+  JSON.stringify(
+    {
+      id,
+      fps: format.fps,
+      width: format.width,
+      height: format.height,
+      music: path.resolve(musicFile),
+      clips: clipPaths.map((p) => path.resolve(p)),
+      clipFps: clips.map((c) => c.fps || 30),
+      originals: clipEntries.map((c) => path.resolve(editDir, c.file)),
+      freezes: Object.fromEntries(Object.entries(assets.freezes).map(([k, v]) => [k, abs(v)])),
+      sfx: assets.sfx.map((x) => ({ ...x, src: abs(x.src) })),
+    },
+    null,
+    1,
+  ),
+);
 fs.writeFileSync(
   path.join(build, "hyperframes.json"),
   JSON.stringify({ $schema: "https://hyperframes.heygen.com/schema/hyperframes.json", paths: { blocks: "compositions", components: "compositions/components", assets: "assets" }, media: { autoProxy: true } }, null, 2),
@@ -201,8 +223,14 @@ if (flag("no-render")) {
 // ---------- Rendu ----------
 fs.mkdirSync(path.join(ROOT, "renders"), { recursive: true });
 const suffix = formatId === "vertical" ? "" : `-${formatId}`;
-const out = path.join(ROOT, "renders", `${id}${suffix}${flag("draft") ? "-draft" : ""}.mp4`);
+const out = graphicsOnly
+  ? path.join(ROOT, "renders", `${id}${suffix}-graphics.mov`)
+  : path.join(ROOT, "renders", `${id}${suffix}${flag("draft") ? "-draft" : ""}.mp4`);
 const quality = flag("draft") ? "draft" : opt("quality", "standard");
-run(HYPERFRAMES, ["render", build, "--output", out, "--fps", String(format.fps), "--quality", quality, "--strict", "--quiet"]);
+const renderArgs = ["render", build, "--output", out, "--fps", String(format.fps), "--strict", "--quiet"];
+// MOV = ProRes 4444 avec transparence (calque titres/logo pour DaVinci) ; sa qualité est fixe.
+if (graphicsOnly) renderArgs.push("--format", "mov");
+else renderArgs.push("--quality", quality);
+run(HYPERFRAMES, renderArgs);
 const info = run("ffprobe", ["-v", "error", "-show_entries", "format=duration:stream=codec_type,width,height,r_frame_rate", "-of", "compact=p=0:nk=1", out], { capture: true });
 console.log(`\n✅ Edit prêt : ${rel(out)}\n${info.trim()}\n`);

@@ -76,7 +76,9 @@ function fontSizeFor(text, W, minDim, base, perChar = 0.47, fill = 0.9) {
   return Math.round(Math.min(base * minDim, (fill * W) / (n * perChar)));
 }
 
-export function compose({ plan, brand, format, assets, seed = 1, debugTiming = false }) {
+// graphicsOnly : uniquement titres, logo, outro, flashs et vignette sur fond transparent
+// (calque à poser au-dessus des clips dans DaVinci).
+export function compose({ plan, brand, format, assets, seed = 1, debugTiming = false, graphicsOnly = false }) {
   const W = format.width;
   const H = format.height;
   const D = plan.duration;
@@ -109,6 +111,7 @@ export function compose({ plan, brand, format, assets, seed = 1, debugTiming = f
     const fx = debugTiming ? { flash: 0, shake: 0, punch: 0, rgb: false, enter: "none", grade: "none" } : s.fx;
     const src = assets.clips[s.clipIndex];
     s.pieces.forEach((p, j) => {
+      if (graphicsOnly) return;
       const style = `object-position:${r3(s.focus * 100)}% 50%`;
       if (p.kind === "video") {
         media.push(
@@ -122,7 +125,7 @@ export function compose({ plan, brand, format, assets, seed = 1, debugTiming = f
 
     const span = s.end - s.start;
     grade.hold(s.start, span, GRADES[fx.grade] || GRADES.none);
-    if (TINT[fx.grade]) tint.hold(s.start, span, TINT[fx.grade]);
+    if (TINT[fx.grade] && !graphicsOnly) tint.hold(s.start, span, TINT[fx.grade]);
     const lead = s.accent - s.start;
     // Entrée du plan.
     if (!s.continuing && (s.index > 0 || fx.enter === "fade")) {
@@ -178,7 +181,7 @@ export function compose({ plan, brand, format, assets, seed = 1, debugTiming = f
 
   // Grain : la texture bouge toutes les 2 images (déterministe).
   const grain = T("#grain", "backgroundPosition", "0px 0px");
-  if (!debugTiming) for (let t = 0; t < D; t += 1 / 30) grain.hold(t, 1 / 30, `${Math.floor(rnd() * 512)}px ${Math.floor(rnd() * 512)}px`);
+  if (!debugTiming && !graphicsOnly) for (let t = 0; t < D; t += 1 / 30) grain.hold(t, 1 / 30, `${Math.floor(rnd() * 512)}px ${Math.floor(rnd() * 512)}px`);
 
   // ---------- Textes ----------
   const texts = [];
@@ -262,12 +265,12 @@ export function compose({ plan, brand, format, assets, seed = 1, debugTiming = f
   // ---------- Son ----------
   const fadeStart = Math.max(0, D - 1.0);
   const lane = { version: 1, lanes: [{ target: "volume", points: [{ t: 0, v: 0 }, { t: 0.03, v: 1 }, { t: r3(fadeStart), v: 1 }, { t: r3(D), v: 0 }] }] };
-  const audio = [
+  const audio = graphicsOnly ? [] : [
     `<audio id="music" src="${esc(assets.music)}" data-start="0" data-duration="${r3(D)}" data-media-start="${plan.musicStart}" data-volume="1" data-track-index="10" data-automation='${JSON.stringify(lane)}'></audio>`,
   ];
   // Chaque bruitage va sur la première piste libre à son instant (pas de sons empilés sur une piste).
   const laneEnds = [];
-  [...(assets.sfx || [])].sort((a, b) => a.start - b.start).forEach((x, i) => {
+  [...(graphicsOnly ? [] : assets.sfx || [])].sort((a, b) => a.start - b.start).forEach((x, i) => {
     let lane = laneEnds.findIndex((end) => end <= x.start + 1e-3);
     if (lane < 0) lane = laneEnds.push(0) - 1;
     laneEnds[lane] = x.start + x.dur;
@@ -289,13 +292,13 @@ export function compose({ plan, brand, format, assets, seed = 1, debugTiming = f
       @font-face { font-family: "${fonts.display.family}"; src: url("${esc(assets.fonts.display)}") format("woff2"); font-weight: ${fonts.display.weight}; }
       @font-face { font-family: "${fonts.text.family}"; src: url("${esc(assets.fonts.text)}") format("woff2"); font-weight: ${fonts.text.weight}; }
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      html, body { width: ${W}px; height: ${H}px; overflow: hidden; background: ${C.black}; }
-      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: ${C.black}; }
+      html, body { width: ${W}px; height: ${H}px; overflow: hidden; background: ${graphicsOnly ? "transparent" : C.black}; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: ${graphicsOnly ? "transparent" : C.black}; }
       .layer { position: absolute; inset: 0; }
       .shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
       #tint { background: ${C.navy}; mix-blend-mode: soft-light; opacity: 0; }
       #vignette { background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.55) 100%); }
-      #grain { background-image: url("${esc(assets.grain)}"); background-size: 512px 512px; mix-blend-mode: overlay; opacity: ${debugTiming ? 0 : 0.1}; }
+      #grain { background-image: url("${esc(assets.grain)}"); background-size: 512px 512px; mix-blend-mode: overlay; opacity: ${debugTiming || graphicsOnly ? 0 : 0.1}; }
       #dim { background: #000; opacity: 0; }
       #flash { background: #fff; opacity: 0; }
       .txt { position: absolute; inset: 0; }
@@ -330,7 +333,7 @@ export function compose({ plan, brand, format, assets, seed = 1, debugTiming = f
         ${media.join("\n        ")}
       </div></div></div></div></div>
       <div id="tint" class="layer"></div>
-      <div id="vignette" class="layer"></div>
+      ${graphicsOnly ? "" : '<div id="vignette" class="layer"></div>'}
       <div id="grain" class="layer"></div>
       <div id="dim" class="layer"></div>
       <div id="flash" class="layer"></div>
