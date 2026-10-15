@@ -1,0 +1,12 @@
+{
+  "id": "vertical",
+  "label": "TikTok / Shorts / Reels (9:16)",
+  "enabled": true,
+  "width": 1080,
+  "height": 1920,
+  "fps": 60,
+  "safe": { "top": 0.08, "bottom": 0.22, "left": 0.05, "right": 0.14 },
+  "titleY": 0.33,
+  "lineY": 0.64,
+  "watermark": { "corner": "top-right", "size": 0.11 }
+}

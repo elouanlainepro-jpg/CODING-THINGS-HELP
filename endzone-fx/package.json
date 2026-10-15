@@ -1,0 +1,25 @@
+{
+  "name": "endzone-fx",
+  "private": true,
+  "type": "module",
+  "description": "Endzone FX \u2014 g\u00e9n\u00e9rateur d'edits NFL avec HyperFrames",
+  "scripts": {
+    "setup": "node scripts/py.mjs -m pip install -r requirements.txt",
+    "new": "node scripts/new-edit.mjs",
+    "edit": "node scripts/make-edit.mjs",
+    "build": "node scripts/make-edit.mjs --no-render",
+    "preview": "node scripts/preview.mjs",
+    "sfx": "node scripts/fetch-sfx.mjs",
+    "test-assets": "node scripts/py.mjs scripts/make_test_assets.py",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "@fontsource/anton": "^5.2.6",
+    "@fontsource/oswald": "^5.2.6",
+    "gsap": "3.15.0",
+    "hyperframes": "0.8.158"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

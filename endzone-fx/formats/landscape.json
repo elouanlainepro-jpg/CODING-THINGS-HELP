@@ -1,0 +1,12 @@
+{
+  "id": "landscape",
+  "label": "YouTube 16:9 (prévu — pas encore validé)",
+  "enabled": false,
+  "width": 1920,
+  "height": 1080,
+  "fps": 60,
+  "safe": { "top": 0.06, "bottom": 0.1, "left": 0.05, "right": 0.05 },
+  "titleY": 0.4,
+  "lineY": 0.78,
+  "watermark": { "corner": "top-right", "size": 0.075 }
+}

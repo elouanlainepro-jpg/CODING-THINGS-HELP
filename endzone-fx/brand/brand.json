@@ -1,0 +1,20 @@
+{
+  "name": "Endzone FX",
+  "short": "EFX",
+  "handle": "@endzonefx",
+  "colors": {
+    "navy": "#1A2745",
+    "cream": "#F2EAD3",
+    "red": "#B83F28",
+    "redDark": "#8D2C1B",
+    "brown": "#6B4130",
+    "black": "#07090F"
+  },
+  "fonts": {
+    "display": { "family": "Anton", "file": "anton-latin-400-normal.woff2", "weight": 400, "package": "@fontsource/anton" },
+    "text": { "family": "Oswald", "file": "oswald-latin-700-normal.woff2", "weight": 700, "package": "@fontsource/oswald" }
+  },
+  "logo": "brand/logo.png",
+  "badge": "brand/logo-badge.png",
+  "outro": { "line1": "ENDZONE FX", "line2": "FOLLOW FOR MORE" }
+}

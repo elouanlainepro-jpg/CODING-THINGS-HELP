@@ -1,0 +1,66 @@
+{
+  "id": "hits",
+  "label": "Biggest hits — violent, rapide, impacts",
+  "keywords": [
+    "hit",
+    "hits",
+    "tackle",
+    "tackles",
+    "plaquage",
+    "plaquages",
+    "sack",
+    "sacks",
+    "hardest",
+    "biggest hits",
+    "destroy",
+    "boom",
+    "smash",
+    "violent"
+  ],
+  "defaultTitle": "BIGGEST HITS",
+  "duration": 15,
+  "dropAt": 0.12,
+  "sections": {
+    "intro": {
+      "slotSec": 99,
+      "pre": 0.6,
+      "post": 0.6,
+      "slowBeats": 0,
+      "rec": 0.6,
+      "accentBeat": "end",
+      "flash": 0,
+      "shake": 0,
+      "punch": 0.04,
+      "rgb": false,
+      "enter": "none",
+      "grade": "cold"
+    },
+    "main": {
+      "slotSec": 1.2,
+      "pre": 1.0,
+      "post": 0.3,
+      "slowBeats": 1,
+      "rec": 1.0,
+      "accentBeat": 1,
+      "flash": 0.85,
+      "shake": 30,
+      "punch": 0.14,
+      "rgb": true,
+      "enter": "zoomblur",
+      "grade": "punchy"
+    }
+  },
+  "freezeEvery": 0,
+  "finale": {
+    "freezeBeats": 2,
+    "stamp": true
+  },
+  "sfx": {
+    "cut": "whoosh",
+    "accent": "impact",
+    "drop": "boom",
+    "riser": "riser",
+    "freeze": "shutter",
+    "finale": "crowd"
+  }
+}

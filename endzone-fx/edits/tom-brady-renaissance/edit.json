@@ -1,0 +1,18 @@
+{
+  "request": "la renaissance de Tom Brady",
+  "style": "story",
+  "player": "Tom Brady",
+  "title": "THE RENAISSANCE",
+  "duration": 25,
+  "format": "vertical",
+  "music": {
+    "file": null
+  },
+  "story_lines": [
+    "199TH PICK IN 2000",
+    "6 RINGS IN NEW ENGLAND",
+    "THEY SAID HE WAS DONE"
+  ],
+  "outro": true,
+  "clips": []
+}

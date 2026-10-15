@@ -1,0 +1,23 @@
+node_modules/
+build/
+renders/
+__pycache__/
+
+# Médias des edits : restent sur ton PC (trop lourds pour GitHub)
+edits/**/.cache/
+edits/**/impacts.jpg
+edits/**/*.mp4
+edits/**/*.mov
+edits/**/*.m4v
+edits/**/*.mkv
+edits/**/*.webm
+edits/**/*.mp3
+edits/**/*.wav
+edits/**/*.m4a
+edits/**/*.aac
+edits/**/*.ogg
+edits/**/*.flac
+edits/demo-*/
+
+# Bruitages téléchargés (npm run sfx) : la liste des crédits reste suivie
+assets/sfx/*/

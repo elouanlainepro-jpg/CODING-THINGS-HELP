@@ -1,0 +1,74 @@
+{
+  "id": "story",
+  "label": "Story — renaissance, comeback, carrière (2 actes)",
+  "keywords": [
+    "renaissance",
+    "rebirth",
+    "comeback",
+    "retour",
+    "story",
+    "histoire",
+    "carriere",
+    "carrière",
+    "career",
+    "legacy",
+    "heritage",
+    "héritage",
+    "journey",
+    "rise",
+    "ascension",
+    "redemption",
+    "rédemption",
+    "revanche",
+    "goat",
+    "legend",
+    "légende"
+  ],
+  "defaultTitle": "THE STORY",
+  "duration": 25,
+  "dropAt": 0.42,
+  "sections": {
+    "act1": {
+      "slotSec": 2.4,
+      "pre": 0.75,
+      "post": 0.45,
+      "slowBeats": 2,
+      "rec": 0.75,
+      "accentBeat": 1,
+      "flash": 0,
+      "shake": 0,
+      "punch": 0.03,
+      "rgb": false,
+      "enter": "fade",
+      "grade": "mono",
+      "share": 0.35
+    },
+    "act2": {
+      "slotSec": 1.2,
+      "pre": 1.15,
+      "post": 0.35,
+      "slowBeats": 1,
+      "rec": 1.1,
+      "accentBeat": 1,
+      "flash": 0.7,
+      "shake": 16,
+      "punch": 0.1,
+      "rgb": true,
+      "enter": "zoomblur",
+      "grade": "punchy"
+    }
+  },
+  "freezeEvery": 0,
+  "finale": {
+    "freezeBeats": 3,
+    "stamp": true
+  },
+  "sfx": {
+    "cut": "whoosh",
+    "accent": "impact",
+    "drop": "boom",
+    "riser": "riser",
+    "freeze": "shutter",
+    "finale": "crowd"
+  }
+}
