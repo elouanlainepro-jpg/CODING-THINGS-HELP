@@ -1,0 +1,24 @@
+{
+  "studio": "MEME PRODUCTION",
+  "canvas": { "width": 1080, "height": 1920, "background": "#000000" },
+  "band": {
+    "top": 96,
+    "height": 564,
+    "color": "#FCFCFC",
+    "text_color": "#111111",
+    "padding_x": 70,
+    "font": "fonts/Inter-SemiBold.otf",
+    "font_weight": null,
+    "max_font_size": 70,
+    "min_font_size": 40,
+    "line_spacing": 1.16,
+    "max_lines": 4,
+    "offset_y": 20,
+    "uppercase": false
+  },
+  "clip": { "top": 660, "height": 864 },
+  "fps": 30,
+  "crf": 18,
+  "music_volume": 0.15,
+  "default_clip_seconds": 6
+}

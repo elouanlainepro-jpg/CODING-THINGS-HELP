@@ -1,0 +1,14 @@
+# médias lourds : restent sur ton disque, pas dans git
+inbox/*
+bibliotheque/*
+sortie/*
+templates/*.mp4
+templates/*.mov
+templates/*.mp3
+templates/*.wav
+!inbox/.gitkeep
+!bibliotheque/.gitkeep
+!sortie/.gitkeep
+__pycache__/
+*.pyc
+!templates/exemple-reference.mp4
